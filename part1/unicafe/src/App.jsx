@@ -13,6 +13,15 @@ const App = () => {
     // if Nan is returned then use 0
     const errorGate = (props) => (isNaN(props) ? 0 : props)
 
+    const noStats = (props) => {
+        return (
+            <div>
+                <h1>Statistics</h1>
+                <p>No feedback given</p>
+            </div>
+        )
+    }
+
     const Feedback = (props) => {
         return (
             <div>
@@ -25,6 +34,9 @@ const App = () => {
     }
 
     const Statistics = (props) => {
+        if (props.good === 0 && props.neutral === 0 && props.bad === 0) {
+            return noStats(props)
+        }
         return (
             <div>
                 <h1>Statistics</h1>
