@@ -37,17 +37,29 @@ const App = () => {
         if (props.good === 0 && props.neutral === 0 && props.bad === 0) {
             return noStats(props)
         }
+
+        const StatisticLine = (props) => (
+            <tr>
+                <td>{props.text}</td>
+                <td>{props.value}</td>
+            </tr>
+        )
         return (
-            <div>
-                <h1>Statistics</h1>
-                <p>Good {props.good}</p>
-                <p>Neutral... {props.neutral}</p>
-                <p>BAD {props.bad}</p>
-                <br />
-                <p>Total {calcTotal(props)}</p>
-                <p>Avg {errorGate(calcAvg(props))}%</p>
-                <p>Pos {errorGate(calcPositive(props))}%</p>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Statistics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <StatisticLine text="Good" value={errorGate(props.good)} />
+                    <StatisticLine text="Neutral" value={errorGate(props.neutral)} />
+                    <StatisticLine text="Bad" value={errorGate(props.bad)} />
+                    <StatisticLine text="Total" value={errorGate(calcTotal(props))} />
+                    <StatisticLine text="Average" value={errorGate(calcAvg(props))} />
+                    <StatisticLine text="Positive" value={errorGate(calcPositive(props)) + ' %'} />
+                </tbody>
+            </table>
         )
     }
 
